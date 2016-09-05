@@ -120,7 +120,6 @@ public class Entrace {
 				scenario.getTitleJL().setVisible(false);
 				scenario.getAutorJL().setVisible(false);
 				scenario.getPressEnterJL().setVisible(false);
-
 			} else {
 				System.out.print("");
 			}
