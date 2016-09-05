@@ -199,7 +199,7 @@ public class Scenario extends JFrame implements KeyListener {
 	}
 
 	public void start() throws InterruptedException {
-//		music.playMusic();
+		music.playMusic();
 		addItens();
 		pressEnter();
 		setVisible(true);

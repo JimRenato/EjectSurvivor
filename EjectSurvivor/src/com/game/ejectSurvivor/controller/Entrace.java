@@ -21,7 +21,7 @@ public class Entrace {
 			optionPane = new JOptionPane("Quantos jogadores irão jogar? (1, 2, 3 ou 4)");
 			optionPane.setWantsInput(true);
 			dialog = optionPane.createDialog(null, "Quantidade de Jogadores");
-			dialog.setBounds(560, 550, 280, 130);
+			dialog.setBounds(560, 550, 350, 130);
 			dialog.setVisible(true);
 			qtdPlayer = Integer.parseInt((String) optionPane.getInputValue());
 
@@ -31,15 +31,15 @@ public class Entrace {
 				optionPane = new JOptionPane("Valor inválido! Tente novamente!");
 				optionPane.setMessage("Valor inválido! Tente novamente!");
 				dialog = optionPane.createDialog(null, "Quantidade de Jogadores");
-				dialog.setBounds(560, 550, 280, 130);
+				dialog.setBounds(560, 550, 350, 130);
 				dialog.setVisible(true);
 				return setPlayer(scenario);
 			}
 		} catch (Exception e) {
-			optionPane = new JOptionPane("Valor inválido! Tente novamente!");
+			optionPane = new JOptionPane();
 			optionPane.setMessage("Valor inválido! Tente novamente!");
 			dialog = optionPane.createDialog(null, "Quantidade de Jogadores");
-			dialog.setBounds(560, 550, 280, 130);
+			dialog.setBounds(560, 550, 350, 130);
 			dialog.setVisible(true);
 			return setPlayer(scenario);
 		}
@@ -52,7 +52,7 @@ public class Entrace {
 			optionPane = new JOptionPane("Qual é o seu nome?");
 			optionPane.setWantsInput(true);
 			dialog = optionPane.createDialog(null, "Digite seu nome:");
-			dialog.setBounds(560, 550, 280, 130);
+			dialog.setBounds(560, 550, 350, 130);
 			dialog.setVisible(true);
 			name = ((String) optionPane.getInputValue());
 
@@ -74,7 +74,7 @@ public class Entrace {
 				optionPane = new JOptionPane("Digite o nome do jogador " + (i + 1) + ":");
 				optionPane.setWantsInput(true);
 				dialog = optionPane.createDialog(null, "Defindo nome dos Jogadores");
-				dialog.setBounds(560, 550, 280, 130);
+				dialog.setBounds(560, 550, 350, 130);
 				dialog.setVisible(true);
 				name = ((String) optionPane.getInputValue());
 
