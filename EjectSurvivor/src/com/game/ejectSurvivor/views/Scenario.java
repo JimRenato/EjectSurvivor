@@ -50,22 +50,22 @@ public class Scenario extends JFrame implements KeyListener {
 	private JLabel numberR2JL;
 	private JLabel numberR3JL;
 
-	private Icon spaceI = new ImageIcon("views/images/space.gif");
-	private Icon space1I = new ImageIcon("views/images/space1.gif");
-	private Icon titleI = new ImageIcon("views/images/title.png");
-	private Icon autorI = new ImageIcon("views/images/autor.png");
-	private Icon pressEnterI = new ImageIcon("views/images/pressEnters.gif");
-	private Icon naveI = new ImageIcon("views/images/nave.png");
-	private Icon helloI = new ImageIcon("views/images/hello.gif");
-	private Icon etI = new ImageIcon("views/images/et.gif");
-	private Icon ciclopsI = new ImageIcon("views/images/ciclops.gif");
-	private Icon robotI = new ImageIcon("views/images/robot.gif");
-	private Icon fireI = new ImageIcon("views/images/fire.gif");
-	private Icon gas0I = new ImageIcon("views/images/gas0.gif");
-	private Icon gas1I = new ImageIcon("views/images/gas1.gif");
-	private Icon numberR1I = new ImageIcon("views/images/numberR1.png");
-	private Icon numberR2I = new ImageIcon("views/images/numberR2.png");
-	private Icon numberR3I = new ImageIcon("views/images/numberR3.png");
+	private Icon spaceI = new ImageIcon("res/images/space.gif");
+	private Icon space1I = new ImageIcon("res/images/space1.gif");
+	private Icon titleI = new ImageIcon("res/images/title.png");
+	private Icon autorI = new ImageIcon("res/images/autor.png");
+	private Icon pressEnterI = new ImageIcon("res/images/pressEnters.gif");
+	private Icon naveI = new ImageIcon("res/images/nave.png");
+	private Icon helloI = new ImageIcon("res/images/hello.gif");
+	private Icon etI = new ImageIcon("res/images/et.gif");
+	private Icon ciclopsI = new ImageIcon("res/images/ciclops.gif");
+	private Icon robotI = new ImageIcon("res/images/robot.gif");
+	private Icon fireI = new ImageIcon("res/images/fire.gif");
+	private Icon gas0I = new ImageIcon("res/images/gas0.gif");
+	private Icon gas1I = new ImageIcon("res/images/gas1.gif");
+	private Icon numberR1I = new ImageIcon("res/images/numberR1.png");
+	private Icon numberR2I = new ImageIcon("res/images/numberR2.png");
+	private Icon numberR3I = new ImageIcon("res/images/numberR3.png");
 
 	public Scenario() {
 

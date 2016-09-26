@@ -49,7 +49,7 @@ public class GamePlay {
 					optionPane = new JOptionPane();
 					optionPane.setMessage(entrace.getArrayPlayers()[i].getName() + " sobreviveu!");
 					dialog = optionPane.createDialog(null, "Sobreviventes");
-					dialog.setBounds(560, 550, 350, 130);
+					dialog.setBounds(520, 550, 350, 130);
 					dialog.setVisible(true);
 				}
 			}
@@ -57,7 +57,7 @@ public class GamePlay {
 				optionPane = new JOptionPane();
 				optionPane.setMessage("Parabéns! Todos sobreviveram!");
 				dialog = optionPane.createDialog(null, "Sobreviventes");
-				dialog.setBounds(560, 550, 350, 130);
+				dialog.setBounds(520, 550, 350, 130);
 				dialog.setVisible(true);
 			}
 		}
@@ -65,7 +65,7 @@ public class GamePlay {
 			optionPane = new JOptionPane();
 			optionPane.setMessage("Você morreu!");
 			dialog = optionPane.createDialog(null, "Morte");
-			dialog.setBounds(560, 550, 350, 130);
+			dialog.setBounds(520, 550, 350, 130);
 			dialog.setVisible(true);
 			everbodyDie = true;
 		}
@@ -73,7 +73,7 @@ public class GamePlay {
 			optionPane = new JOptionPane();
 			optionPane.setMessage("Todos morreram!");
 			dialog = optionPane.createDialog(null, "Morte");
-			dialog.setBounds(560, 550, 350, 130);
+			dialog.setBounds(520, 550, 350, 130);
 			dialog.setVisible(true);
 			everbodyDie = true;
 		}
@@ -97,7 +97,7 @@ public class GamePlay {
 							entrace.getArrayPlayers()[i].getName() + ", em qual cabine você deseja entrar?");
 					optionPane.setWantsInput(true);
 					dialog = optionPane.createDialog(null, "Escolha de Cabine");
-					dialog.setBounds(560, 550, 350, 130);
+					dialog.setBounds(520, 550, 350, 130);
 					dialog.setVisible(true);
 					Integer option = Integer.parseInt((String) optionPane.getInputValue());
 
@@ -172,6 +172,7 @@ public class GamePlay {
 		if (this.qtdCabin == 3 && this.everbodyDie == false) {
 			Thread.sleep(3000);
 			scenario.getGas0JL().setVisible(true);
+			
 		}
 
 		if (this.qtdCabin == 2 && this.everbodyDie == false) {
@@ -221,7 +222,7 @@ public class GamePlay {
 		optionPane = new JOptionPane("Deseja jogar novamente?");
 		optionPane.setOptions(options);
 		dialog = optionPane.createDialog(null, "Deseja jogar novamente?");
-		dialog.setBounds(560, 550, 350, 130);
+		dialog.setBounds(520, 550, 350, 130);
 		dialog.setVisible(true);
 
 		Object result = optionPane.getValue();
@@ -256,7 +257,7 @@ public class GamePlay {
 			optionPane = new JOptionPane();
 			optionPane.setMessage("Obrigado por jogar e até a próxima!!");
 			dialog = optionPane.createDialog(null, "Fim");
-			dialog.setBounds(560, 550, 350, 130);
+			dialog.setBounds(520, 550, 350, 130);
 			dialog.setVisible(true);
 			this.setPlay(false);
 		}

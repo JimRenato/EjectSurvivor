@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 public class Music {
 
 	private static Sequencer player;
-	private static String musicPath = "views/music/IPutASpellOnYou.mid";
+	private static String musicPath = "res/music/IPutASpellOnYou.mid";
 	private int repeat = 10;
 
 	public void playMusic() {
