@@ -1,374 +1,362 @@
 package com.rsm;
 
-import java.awt.event.ActionEvent;
+import javax.swing.*;
 import java.util.Random;
-
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-
-import com.rsm.Scenario;
 
 public class GamePlay {
 
-	private Integer qtdCabin = 4;
-	private Integer cabinRandom;
-	private Integer qtdPlayerLive;
-	private boolean play = true;
-	private boolean everbodyDie = false;
-	private JOptionPane optionPane;
-	private JDialog dialog;
+    private Integer qtyCabin = 4;
+    private Integer cabinRandom;
+    private Integer qtyPlayerLive;
+    private boolean play = true;
+    private boolean everbodyDie = false;
+    private JOptionPane optionPane;
+    private JDialog dialog;
 
-	public void round(Entrace entrace, Scenario scenario) throws InterruptedException {
+    public void round(Entrace entrace, Scenario scenario) throws InterruptedException {
 
-		this.qtdPlayerLive = entrace.getQtdPlayer();
-		this.everbodyDie = false;
+        this.qtyPlayerLive = entrace.getQtdPlayer();
+        this.everbodyDie = false;
 
-		for (int j = 0; j < 3; j++) {
-			finalVerify(entrace, scenario);
-			chooseCabin(entrace);
-			moveCharacter(entrace, scenario);
-			if (this.qtdCabin == 2) {
-				scenario.getNumberR3JL().setVisible(false);
-			}
-			cabinRandom = randomNumber(this.qtdCabin);
-			checkDead(entrace);
-			this.qtdCabin = this.qtdCabin - 1;
-			desableNames(scenario);
-			numberControl(scenario);
-			gasControl(scenario);
-		}
-		finalVerify(entrace, scenario);
-	}
+        for (int j = 0; j < 3; j++) {
+            finalVerify(entrace);
+            chooseCabin(entrace);
+            moveCharacter(entrace, scenario);
+            if (this.qtyCabin == 2) {
+                scenario.getNumberR3JL().setVisible(false);
+            }
+            cabinRandom = randomNumber(this.qtyCabin);
+            checkDead(entrace);
+            this.qtyCabin = this.qtyCabin - 1;
+            desableNames(scenario);
+            numberControl(scenario);
+            gasControl(scenario);
+        }
+        finalVerify(entrace);
+    }
 
-	public void finalVerify(Entrace entrace, Scenario scenario) {
-		if (this.qtdPlayerLive > 0 && this.qtdCabin < 2) {
+    private void finalVerify(Entrace entrace) {
+        if (this.qtyPlayerLive > 0 && this.qtyCabin < 2) {
 
-			for (int i = 0; i < entrace.getQtdPlayer(); i++) {
-				if (entrace.getArrayPlayers()[i].isAlive() == true) {
+            for (int i = 0; i < entrace.getQtdPlayer(); i++) {
+                if (entrace.getArrayPlayers()[i].isAlive()) {
 
-					optionPane = new JOptionPane();
-					optionPane.setMessage(entrace.getArrayPlayers()[i].getName() + " sobreviveu!");
-					dialog = optionPane.createDialog(null, "Sobreviventes");
-					dialog.setBounds(520, 550, 350, 130);
-					dialog.setVisible(true);
-				}
-			}
-			if (this.qtdPlayerLive == entrace.getQtdPlayer()) {
-				optionPane = new JOptionPane();
-				optionPane.setMessage("Parabéns! Todos sobreviveram!");
-				dialog = optionPane.createDialog(null, "Sobreviventes");
-				dialog.setBounds(520, 550, 350, 130);
-				dialog.setVisible(true);
-			}
-		}
-		if (this.qtdPlayerLive == 0 && this.everbodyDie == false && entrace.getQtdPlayer() == 1) {
-			optionPane = new JOptionPane();
-			optionPane.setMessage("Você morreu!");
-			dialog = optionPane.createDialog(null, "Morte");
-			dialog.setBounds(520, 550, 350, 130);
-			dialog.setVisible(true);
-			everbodyDie = true;
-		}
-		if (this.qtdPlayerLive == 0 && this.everbodyDie == false) {
-			optionPane = new JOptionPane();
-			optionPane.setMessage("Todos morreram!");
-			dialog = optionPane.createDialog(null, "Morte");
-			dialog.setBounds(520, 550, 350, 130);
-			dialog.setVisible(true);
-			everbodyDie = true;
-		}
-	}
+                    optionPane = new JOptionPane();
+                    optionPane.setMessage(entrace.getArrayPlayers()[i].getName() + " survived!");
+                    dialog = optionPane.createDialog(null, "Survivors");
+                    dialog.setBounds(520, 550, 350, 130);
+                    dialog.setVisible(true);
+                }
+            }
+            if (this.qtyPlayerLive.equals(entrace.getQtdPlayer())) {
+                optionPane = new JOptionPane();
+                optionPane.setMessage("Congratulations! All survived!");
+                dialog = optionPane.createDialog(null, "Survivors");
+                dialog.setBounds(520, 550, 350, 130);
+                dialog.setVisible(true);
+            }
+        }
+        if (this.qtyPlayerLive == 0 && !this.everbodyDie && entrace.getQtdPlayer() == 1) {
+            optionPane = new JOptionPane();
+            optionPane.setMessage("You died!");
+            dialog = optionPane.createDialog(null, "Death");
+            dialog.setBounds(520, 550, 350, 130);
+            dialog.setVisible(true);
+            everbodyDie = true;
+        }
+        if (this.qtyPlayerLive == 0 && !this.everbodyDie) {
+            optionPane = new JOptionPane();
+            optionPane.setMessage("Everybody died!");
+            dialog = optionPane.createDialog(null, "Death");
+            dialog.setBounds(520, 550, 350, 130);
+            dialog.setVisible(true);
+            everbodyDie = true;
+        }
+    }
 
-	public void desableNames(Scenario scenario) {
-		if (qtdCabin <= 3) {
-			scenario.getPlayer1JL().setVisible(false);
-			scenario.getPlayer2JL().setVisible(false);
-			scenario.getPlayer3JL().setVisible(false);
-			scenario.getPlayer4JL().setVisible(false);
-		}
-	}
+    private void desableNames(Scenario scenario) {
+        if (qtyCabin <= 3) {
+            scenario.getPlayer1JL().setVisible(false);
+            scenario.getPlayer2JL().setVisible(false);
+            scenario.getPlayer3JL().setVisible(false);
+            scenario.getPlayer4JL().setVisible(false);
+        }
+    }
 
-	public void chooseCabin(Entrace entrace) {
-		for (int i = 0; i < entrace.getQtdPlayer(); i++) {
-			if (entrace.getArrayPlayers()[i].isAlive() == true) {
-				try {
+    private void chooseCabin(Entrace entrace) {
+        for (int i = 0; i < entrace.getQtdPlayer(); i++) {
+            if (entrace.getArrayPlayers()[i].isAlive()) {
+                try {
+                    optionPane = new JOptionPane(
+                            entrace.getArrayPlayers()[i].getName() + ", which cabin do you want to enter?");
+                    optionPane.setWantsInput(true);
+                    dialog = optionPane.createDialog(null, "Choice of Cabin");
+                    dialog.setBounds(520, 550, 350, 130);
+                    dialog.setVisible(true);
+                    Integer option = Integer.parseInt((String) optionPane.getInputValue());
 
-					optionPane = new JOptionPane(
-							entrace.getArrayPlayers()[i].getName() + ", em qual cabine você deseja entrar?");
-					optionPane.setWantsInput(true);
-					dialog = optionPane.createDialog(null, "Escolha de Cabine");
-					dialog.setBounds(520, 550, 350, 130);
-					dialog.setVisible(true);
-					Integer option = Integer.parseInt((String) optionPane.getInputValue());
+                    if (option >= 1 && option <= this.qtyCabin) {
+                        entrace.getArrayPlayers()[i].setCurrentCabin(option);
+                    } else {
+                        cabinNotExist(entrace, i);
+                    }
+                } catch (Exception e) {
+                    cabinNotExist(entrace, i);
+                }
+            }
+        }
+    }
 
-					if (option >= 1 && option <= this.qtdCabin) {
-						entrace.getArrayPlayers()[i].setCurrentCabin(option);
-					} else {
-						optionPane = new JOptionPane();
-						optionPane.setMessage("Cabine escolhida não existe! Você ficou na cabine atual!");
-						dialog = optionPane.createDialog(null, "Escolha de Cabine");
-						dialog.setBounds(520, 550, 450, 130);
-						dialog.setVisible(true);
-						entrace.getArrayPlayers()[i].setCurrentCabin(0);
-					}
-				} catch (Exception e) {
-					optionPane = new JOptionPane();
-					optionPane.setMessage("Cabine escolhida não existe! Você ficou na cabine atual!");
-					dialog = optionPane.createDialog(null, "Escolha de Cabine");
-					dialog.setBounds(520, 550, 450, 130);
-					dialog.setVisible(true);
-					entrace.getArrayPlayers()[i].setCurrentCabin(0);
-				}
-			}
-		}
-	}
+    private void cabinNotExist(Entrace entrace, int i) {
+        optionPane = new JOptionPane();
+        optionPane.setMessage("Cabin chosen does not exist! You stayed in the current cabin.!");
+        dialog = optionPane.createDialog(null, "Choice of Cabin");
+        dialog.setBounds(520, 550, 450, 130);
+        dialog.setVisible(true);
+        entrace.getArrayPlayers()[i].setCurrentCabin(0);
+    }
 
-	public Integer randomNumber(Integer maxNumber) {
-		Random random = new Random();
-		Integer numberRandom = random.nextInt(maxNumber);
-		return numberRandom;
-	}
+    private Integer randomNumber(Integer maxNumber) {
+        Random random = new Random();
+        return random.nextInt(maxNumber);
+    }
 
-	public void checkDead(Entrace entrace) {
-		for (int i = 0; i < entrace.getQtdPlayer(); i++) {
-			if (entrace.getArrayPlayers()[i].getCurrentCabin() == (this.cabinRandom + 1)
-					|| entrace.getArrayPlayers()[i].getCurrentCabin() == 0
-							&& entrace.getArrayPlayers()[i].isAlive() == true) {
-				entrace.getArrayPlayers()[i].setAlive(false);
-				entrace.getArrayPlayers()[i].setCurrentCabin(0);
-				this.qtdPlayerLive = this.qtdPlayerLive - 1;
-			}
-		}
-	}
+    private void checkDead(Entrace entrace) {
+        for (int i = 0; i < entrace.getQtdPlayer(); i++) {
+            if (entrace.getArrayPlayers()[i].getCurrentCabin() == (this.cabinRandom + 1)
+                    || entrace.getArrayPlayers()[i].getCurrentCabin() == 0
+                    && entrace.getArrayPlayers()[i].isAlive()) {
+                entrace.getArrayPlayers()[i].setAlive(false);
+                entrace.getArrayPlayers()[i].setCurrentCabin(0);
+                this.qtyPlayerLive = this.qtyPlayerLive - 1;
+            }
+        }
+    }
 
-	public void numberControl(Scenario scenario) {
+    private void numberControl(Scenario scenario) {
 
-		if (this.qtdCabin == 3) {
-			scenario.getNumberR1JL().setVisible(false);
-			scenario.getNumberR2JL().setVisible(true);
-		}
-		if (this.qtdCabin == 2) {
-			scenario.getNumberR2JL().setVisible(false);
-			scenario.getNumberR3JL().setVisible(true);
-		}
-		scenario.repaint();
-	}
+        if (this.qtyCabin == 3) {
+            scenario.getNumberR1JL().setVisible(false);
+            scenario.getNumberR2JL().setVisible(true);
+        }
+        if (this.qtyCabin == 2) {
+            scenario.getNumberR2JL().setVisible(false);
+            scenario.getNumberR3JL().setVisible(true);
+        }
+        scenario.repaint();
+    }
 
-	public void gasControl(Scenario scenario) throws InterruptedException {
+    private void gasControl(Scenario scenario) throws InterruptedException {
 
-		if (this.everbodyDie == true) {
-			scenario.getGas0JL().setVisible(true);
-			scenario.getGas1JL().setVisible(true);
-			scenario.getGas2JL().setVisible(true);
-			scenario.getGas3JL().setVisible(true);
-			scenario.getGas4JL().setVisible(true);
-			scenario.getGas5JL().setVisible(true);
-			scenario.getGas6JL().setVisible(true);
-			scenario.getGas7JL().setVisible(true);
-			scenario.getGas8JL().setVisible(true);
-			scenario.getGas9JL().setVisible(true);
-		}
+        if (this.everbodyDie) {
+            scenario.getGas0JL().setVisible(true);
+            scenario.getGas1JL().setVisible(true);
+            scenario.getGas2JL().setVisible(true);
+            scenario.getGas3JL().setVisible(true);
+            scenario.getGas4JL().setVisible(true);
+            scenario.getGas5JL().setVisible(true);
+            scenario.getGas6JL().setVisible(true);
+            scenario.getGas7JL().setVisible(true);
+            scenario.getGas8JL().setVisible(true);
+            scenario.getGas9JL().setVisible(true);
+        }
 
-		if (this.qtdCabin == 3 && this.everbodyDie == false) {
-			Thread.sleep(3000);
-			scenario.getGas0JL().setVisible(true);
-			
-		}
+        if (this.qtyCabin == 3 && !this.everbodyDie) {
+            Thread.sleep(3000);
+            scenario.getGas0JL().setVisible(true);
+        }
 
-		if (this.qtdCabin == 2 && this.everbodyDie == false) {
-			Thread.sleep(3000);
-			scenario.getGas1JL().setVisible(true);
-			scenario.getGas2JL().setVisible(true);
-			scenario.getGas3JL().setVisible(true);
-			scenario.getGas4JL().setVisible(true);
-		}
+        if (this.qtyCabin == 2 && !this.everbodyDie) {
+            Thread.sleep(3000);
+            scenario.getGas1JL().setVisible(true);
+            scenario.getGas2JL().setVisible(true);
+            scenario.getGas3JL().setVisible(true);
+            scenario.getGas4JL().setVisible(true);
+        }
 
-		if (this.qtdCabin == 1 && this.everbodyDie == false) {
-			Thread.sleep(3000);
-			scenario.getGas5JL().setVisible(true);
-			scenario.getGas6JL().setVisible(true);
-			scenario.getGas7JL().setVisible(true);
-		}
+        if (this.qtyCabin == 1 && !this.everbodyDie) {
+            Thread.sleep(3000);
+            scenario.getGas5JL().setVisible(true);
+            scenario.getGas6JL().setVisible(true);
+            scenario.getGas7JL().setVisible(true);
+        }
 
-		if (this.qtdCabin == 3 && this.cabinRandom == 0) {
-			scenario.getGas1JL().setVisible(true);
-		} else if (this.qtdCabin == 3 && this.cabinRandom == 1) {
-			scenario.getGas2JL().setVisible(true);
-		} else if (this.qtdCabin == 3 && this.cabinRandom == 2) {
-			scenario.getGas3JL().setVisible(true);
-		} else if (this.qtdCabin == 3 && this.cabinRandom == 3) {
-			scenario.getGas4JL().setVisible(true);
-		}
+        if (this.qtyCabin == 3 && this.cabinRandom == 0) {
+            scenario.getGas1JL().setVisible(true);
+        } else if (this.qtyCabin == 3 && this.cabinRandom == 1) {
+            scenario.getGas2JL().setVisible(true);
+        } else if (this.qtyCabin == 3 && this.cabinRandom == 2) {
+            scenario.getGas3JL().setVisible(true);
+        } else if (this.qtyCabin == 3 && this.cabinRandom == 3) {
+            scenario.getGas4JL().setVisible(true);
+        }
 
-		if (this.qtdCabin == 2 && this.cabinRandom == 0) {
-			scenario.getGas5JL().setVisible(true);
-		} else if (this.qtdCabin == 2 && cabinRandom == 1) {
-			scenario.getGas6JL().setVisible(true);
-		} else if (qtdCabin == 2 && cabinRandom == 2) {
-			scenario.getGas7JL().setVisible(true);
-		}
+        if (this.qtyCabin == 2 && this.cabinRandom == 0) {
+            scenario.getGas5JL().setVisible(true);
+        } else if (this.qtyCabin == 2 && cabinRandom == 1) {
+            scenario.getGas6JL().setVisible(true);
+        } else if (qtyCabin == 2 && cabinRandom == 2) {
+            scenario.getGas7JL().setVisible(true);
+        }
 
-		if (qtdCabin == 1 && cabinRandom == 0) {
-			scenario.getGas8JL().setVisible(true);
-		} else if (qtdCabin == 1 && cabinRandom == 1) {
-			scenario.getGas9JL().setVisible(true);
-		}
-	}
+        if (qtyCabin == 1 && cabinRandom == 0) {
+            scenario.getGas8JL().setVisible(true);
+        } else if (qtyCabin == 1 && cabinRandom == 1) {
+            scenario.getGas9JL().setVisible(true);
+        }
+    }
 
-	public void playAgain(ActionEvent eventButton, Scenario scenario, Entrace entrace) {
+    public void playAgain(Scenario scenario, Entrace entrace) {
+        String[] options = new String[]{"Yes", "No"};
+        optionPane = new JOptionPane("Do you want to play again?");
+        optionPane.setOptions(options);
+        dialog = optionPane.createDialog(null, "Do you want to play again?");
+        dialog.setBounds(520, 550, 350, 130);
+        dialog.setVisible(true);
 
-		String[] options = new String[] { "Sim", "Não" };
+        Object result = optionPane.getValue();
+        if (result == options[0]) {
+            for (int i = 0; i < entrace.getQtdPlayer(); i++) {
+                entrace.getArrayPlayers()[i].setAlive(true);
+            }
+            qtyCabin = 4;
+            scenario.getGas0JL().setVisible(false);
+            scenario.getGas1JL().setVisible(false);
+            scenario.getGas2JL().setVisible(false);
+            scenario.getGas3JL().setVisible(false);
+            scenario.getGas4JL().setVisible(false);
+            scenario.getGas5JL().setVisible(false);
+            scenario.getGas6JL().setVisible(false);
+            scenario.getGas7JL().setVisible(false);
+            scenario.getGas8JL().setVisible(false);
+            scenario.getGas9JL().setVisible(false);
+            scenario.getPlayer1JL().setVisible(true);
+            scenario.getPlayer2JL().setVisible(true);
+            scenario.getPlayer3JL().setVisible(true);
+            scenario.getPlayer4JL().setVisible(true);
+            scenario.getNumberR1JL().setVisible(true);
+            scenario.getNumberR2JL().setVisible(false);
+            scenario.getNumberR3JL().setVisible(false);
+            scenario.getHelloJL().setLocation(480, 420);
+            scenario.getEtJL().setLocation(610, 420);
+            scenario.getCiclopsJL().setLocation(730, 420);
+            scenario.getRobotJL().setLocation(850, 420);
+            scenario.repaint();
+        } else {
+            optionPane = new JOptionPane();
+            optionPane.setMessage("Thanks for playing and see you next time.");
+            dialog = optionPane.createDialog(null, "End");
+            dialog.setBounds(520, 550, 350, 130);
+            dialog.setVisible(true);
+            this.setPlay();
+        }
+    }
 
-		optionPane = new JOptionPane("Deseja jogar novamente?");
-		optionPane.setOptions(options);
-		dialog = optionPane.createDialog(null, "Deseja jogar novamente?");
-		dialog.setBounds(520, 550, 350, 130);
-		dialog.setVisible(true);
+    private void moveCharacter(Entrace entrace, Scenario scenario) {
+        for (int i = 0; i < entrace.getQtdPlayer(); i++) {
+            if (entrace.getArrayPlayers()[i].isAlive()) {
+                if (this.qtyCabin == 4) {
+                    if (i == 0 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
+                        scenario.getHelloJL().setLocation(440, 340);
+                    } else if (i == 0 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
+                        scenario.getHelloJL().setLocation(563, 340);
+                    } else if (i == 0 && entrace.getArrayPlayers()[i].getCurrentCabin() == 3) {
+                        scenario.getHelloJL().setLocation(686, 340);
+                    } else if (i == 0 && entrace.getArrayPlayers()[i].getCurrentCabin() == 4) {
+                        scenario.getHelloJL().setLocation(809, 340);
+                    }
+                    if (i == 1 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
+                        scenario.getEtJL().setLocation(472, 340);
+                    } else if (i == 1 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
+                        scenario.getEtJL().setLocation(595, 340);
+                    } else if (i == 1 && entrace.getArrayPlayers()[i].getCurrentCabin() == 3) {
+                        scenario.getEtJL().setLocation(718, 340);
+                    } else if (i == 1 && entrace.getArrayPlayers()[i].getCurrentCabin() == 4) {
+                        scenario.getEtJL().setLocation(841, 340);
+                    }
+                    if (i == 2 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
+                        scenario.getCiclopsJL().setLocation(498, 340);
+                    } else if (i == 2 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
+                        scenario.getCiclopsJL().setLocation(621, 340);
+                    } else if (i == 2 && entrace.getArrayPlayers()[i].getCurrentCabin() == 3) {
+                        scenario.getCiclopsJL().setLocation(744, 340);
+                    } else if (i == 2 && entrace.getArrayPlayers()[i].getCurrentCabin() == 4) {
+                        scenario.getCiclopsJL().setLocation(867, 340);
+                    }
+                    if (i == 3 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
+                        scenario.getRobotJL().setLocation(525, 340);
+                    } else if (i == 3 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
+                        scenario.getRobotJL().setLocation(648, 340);
+                    } else if (i == 3 && entrace.getArrayPlayers()[i].getCurrentCabin() == 3) {
+                        scenario.getRobotJL().setLocation(771, 340);
+                    } else if (i == 3 && entrace.getArrayPlayers()[i].getCurrentCabin() == 4) {
+                        scenario.getRobotJL().setLocation(894, 340);
+                    }
+                }
 
-		Object result = optionPane.getValue();
-		if (result == options[0]) {
-			for (int i = 0; i < entrace.getQtdPlayer(); i++) {
-				entrace.getArrayPlayers()[i].setAlive(true);
-			}
-			qtdCabin = 4;
-			scenario.getGas0JL().setVisible(false);
-			scenario.getGas1JL().setVisible(false);
-			scenario.getGas2JL().setVisible(false);
-			scenario.getGas3JL().setVisible(false);
-			scenario.getGas4JL().setVisible(false);
-			scenario.getGas5JL().setVisible(false);
-			scenario.getGas6JL().setVisible(false);
-			scenario.getGas7JL().setVisible(false);
-			scenario.getGas8JL().setVisible(false);
-			scenario.getGas9JL().setVisible(false);
-			scenario.getPlayer1JL().setVisible(true);
-			scenario.getPlayer2JL().setVisible(true);
-			scenario.getPlayer3JL().setVisible(true);
-			scenario.getPlayer4JL().setVisible(true);
-			scenario.getNumberR1JL().setVisible(true);
-			scenario.getNumberR2JL().setVisible(false);
-			scenario.getNumberR3JL().setVisible(false);
-			scenario.getHelloJL().setLocation(480, 420);
-			scenario.getEtJL().setLocation(610, 420);
-			scenario.getCiclopsJL().setLocation(730, 420);
-			scenario.getRobotJL().setLocation(850, 420);
-			scenario.repaint();
-		} else {
-			optionPane = new JOptionPane();
-			optionPane.setMessage("Obrigado por jogar e até a próxima!!");
-			dialog = optionPane.createDialog(null, "Fim");
-			dialog.setBounds(520, 550, 350, 130);
-			dialog.setVisible(true);
-			this.setPlay(false);
-		}
-	}
+                if (this.qtyCabin == 3) {
+                    if (i == 0 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
+                        scenario.getHelloJL().setLocation(500, 245);
+                    } else if (i == 0 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
+                        scenario.getHelloJL().setLocation(623, 245);
+                    } else if (i == 0 && entrace.getArrayPlayers()[i].getCurrentCabin() == 3) {
+                        scenario.getHelloJL().setLocation(748, 245);
+                    }
+                    if (i == 1 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
+                        scenario.getEtJL().setLocation(532, 245);
+                    } else if (i == 1 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
+                        scenario.getEtJL().setLocation(655, 245);
+                    } else if (i == 1 && entrace.getArrayPlayers()[i].getCurrentCabin() == 3) {
+                        scenario.getEtJL().setLocation(780, 245);
+                    }
+                    if (i == 2 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
+                        scenario.getCiclopsJL().setLocation(558, 245);
+                    } else if (i == 2 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
+                        scenario.getCiclopsJL().setLocation(681, 245);
+                    } else if (i == 2 && entrace.getArrayPlayers()[i].getCurrentCabin() == 3) {
+                        scenario.getCiclopsJL().setLocation(806, 245);
+                    }
+                    if (i == 3 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
+                        scenario.getRobotJL().setLocation(585, 245);
+                    } else if (i == 3 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
+                        scenario.getRobotJL().setLocation(708, 245);
+                    } else if (i == 3 && entrace.getArrayPlayers()[i].getCurrentCabin() == 3) {
+                        scenario.getRobotJL().setLocation(833, 245);
+                    }
+                }
 
-	public void moveCharacter(Entrace entrace, Scenario scenario) {
+                if (this.qtyCabin == 2) {
+                    if (i == 0 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
+                        scenario.getHelloJL().setLocation(560, 150);
+                    } else if (i == 0 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
+                        scenario.getHelloJL().setLocation(687, 150);
+                    }
+                    if (i == 1 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
+                        scenario.getEtJL().setLocation(592, 150);
+                    } else if (i == 1 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
+                        scenario.getEtJL().setLocation(719, 150);
+                    }
+                    if (i == 2 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
+                        scenario.getCiclopsJL().setLocation(618, 150);
+                    } else if (i == 2 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
+                        scenario.getCiclopsJL().setLocation(745, 150);
+                    }
+                    if (i == 3 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
+                        scenario.getRobotJL().setLocation(645, 150);
+                    } else if (i == 3 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
+                        scenario.getRobotJL().setLocation(772, 150);
+                    }
+                }
+            }
+        }
+        scenario.repaint();
+    }
 
-		for (int i = 0; i < entrace.getQtdPlayer(); i++) {
-			if (entrace.getArrayPlayers()[i].isAlive() == true) {
-				if (this.qtdCabin == 4) {
-					if (i == 0 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
-						scenario.getHelloJL().setLocation(440, 340);
-					} else if (i == 0 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
-						scenario.getHelloJL().setLocation(563, 340);
-					} else if (i == 0 && entrace.getArrayPlayers()[i].getCurrentCabin() == 3) {
-						scenario.getHelloJL().setLocation(686, 340);
-					} else if (i == 0 && entrace.getArrayPlayers()[i].getCurrentCabin() == 4) {
-						scenario.getHelloJL().setLocation(809, 340);
-					}
-					if (i == 1 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
-						scenario.getEtJL().setLocation(472, 340);
-					} else if (i == 1 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
-						scenario.getEtJL().setLocation(595, 340);
-					} else if (i == 1 && entrace.getArrayPlayers()[i].getCurrentCabin() == 3) {
-						scenario.getEtJL().setLocation(718, 340);
-					} else if (i == 1 && entrace.getArrayPlayers()[i].getCurrentCabin() == 4) {
-						scenario.getEtJL().setLocation(841, 340);
-					}
-					if (i == 2 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
-						scenario.getCiclopsJL().setLocation(498, 340);
-					} else if (i == 2 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
-						scenario.getCiclopsJL().setLocation(621, 340);
-					} else if (i == 2 && entrace.getArrayPlayers()[i].getCurrentCabin() == 3) {
-						scenario.getCiclopsJL().setLocation(744, 340);
-					} else if (i == 2 && entrace.getArrayPlayers()[i].getCurrentCabin() == 4) {
-						scenario.getCiclopsJL().setLocation(867, 340);
-					}
-					if (i == 3 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
-						scenario.getRobotJL().setLocation(525, 340);
-					} else if (i == 3 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
-						scenario.getRobotJL().setLocation(648, 340);
-					} else if (i == 3 && entrace.getArrayPlayers()[i].getCurrentCabin() == 3) {
-						scenario.getRobotJL().setLocation(771, 340);
-					} else if (i == 3 && entrace.getArrayPlayers()[i].getCurrentCabin() == 4) {
-						scenario.getRobotJL().setLocation(894, 340);
-					}
-				}
+    public boolean isPlay() {
+        return play;
+    }
 
-				if (this.qtdCabin == 3) {
-					if (i == 0 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
-						scenario.getHelloJL().setLocation(500, 245);
-					} else if (i == 0 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
-						scenario.getHelloJL().setLocation(623, 245);
-					} else if (i == 0 && entrace.getArrayPlayers()[i].getCurrentCabin() == 3) {
-						scenario.getHelloJL().setLocation(748, 245);
-					}
-					if (i == 1 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
-						scenario.getEtJL().setLocation(532, 245);
-					} else if (i == 1 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
-						scenario.getEtJL().setLocation(655, 245);
-					} else if (i == 1 && entrace.getArrayPlayers()[i].getCurrentCabin() == 3) {
-						scenario.getEtJL().setLocation(780, 245);
-					}
-					if (i == 2 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
-						scenario.getCiclopsJL().setLocation(558, 245);
-					} else if (i == 2 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
-						scenario.getCiclopsJL().setLocation(681, 245);
-					} else if (i == 2 && entrace.getArrayPlayers()[i].getCurrentCabin() == 3) {
-						scenario.getCiclopsJL().setLocation(806, 245);
-					}
-					if (i == 3 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
-						scenario.getRobotJL().setLocation(585, 245);
-					} else if (i == 3 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
-						scenario.getRobotJL().setLocation(708, 245);
-					} else if (i == 3 && entrace.getArrayPlayers()[i].getCurrentCabin() == 3) {
-						scenario.getRobotJL().setLocation(833, 245);
-					}
-				}
-
-				if (this.qtdCabin == 2) {
-					if (i == 0 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
-						scenario.getHelloJL().setLocation(560, 150);
-					} else if (i == 0 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
-						scenario.getHelloJL().setLocation(687, 150);
-					}
-					if (i == 1 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
-						scenario.getEtJL().setLocation(592, 150);
-					} else if (i == 1 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
-						scenario.getEtJL().setLocation(719, 150);
-					}
-					if (i == 2 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
-						scenario.getCiclopsJL().setLocation(618, 150);
-					} else if (i == 2 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
-						scenario.getCiclopsJL().setLocation(745, 150);
-					}
-					if (i == 3 && entrace.getArrayPlayers()[i].getCurrentCabin() == 1) {
-						scenario.getRobotJL().setLocation(645, 150);
-					} else if (i == 3 && entrace.getArrayPlayers()[i].getCurrentCabin() == 2) {
-						scenario.getRobotJL().setLocation(772, 150);
-					}
-				}
-			}
-		}
-		scenario.repaint();
-	}
-
-	public boolean isPlay() {
-		return play;
-	}
-
-	public void setPlay(boolean play) {
-		this.play = play;
-	}
+    private void setPlay() {
+        this.play = false;
+    }
 }
