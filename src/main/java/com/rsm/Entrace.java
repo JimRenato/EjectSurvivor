@@ -2,7 +2,7 @@ package com.rsm;
 
 import javax.swing.*;
 
-public class Entrace {
+class Entrace {
 
     private Integer qtdPlayer;
     private Player[] arrayPlayers = new Player[4];
@@ -16,7 +16,7 @@ public class Entrace {
             optionPane = new JOptionPane("How many players will play? (1, 2, 3 or 4)");
             optionPane.setWantsInput(true);
             dialog = optionPane.createDialog(null, "Number of Players");
-            dialog.setBounds(520, 550, 350, 130);
+            dialog.setBounds(795, 600, 350, 130);
             dialog.setVisible(true);
             qtdPlayer = Integer.parseInt((String) optionPane.getInputValue());
 
@@ -34,7 +34,7 @@ public class Entrace {
         optionPane = new JOptionPane();
         optionPane.setMessage("Invalid value! Try again!");
         dialog = optionPane.createDialog(null, "Number of Players");
-        dialog.setBounds(520, 550, 350, 130);
+        dialog.setBounds(795, 600, 350, 130);
         dialog.setVisible(true);
         return setPlayer();
     }
@@ -47,7 +47,7 @@ public class Entrace {
             optionPane = new JOptionPane("What is your name?");
             optionPane.setWantsInput(true);
             dialog = optionPane.createDialog(null, "Type your name:");
-            dialog.setBounds(520, 550, 350, 130);
+            dialog.setBounds(795, 600, 350, 130);
             dialog.setVisible(true);
             name = ((String) optionPane.getInputValue());
 
@@ -69,7 +69,7 @@ public class Entrace {
                 optionPane = new JOptionPane("Enter the player's name " + (i + 1) + ":");
                 optionPane.setWantsInput(true);
                 dialog = optionPane.createDialog(null, "Defining Players' Name");
-                dialog.setBounds(520, 550, 350, 130);
+                dialog.setBounds(795, 600, 350, 130);
                 dialog.setVisible(true);
                 name = ((String) optionPane.getInputValue());
 
@@ -105,7 +105,7 @@ public class Entrace {
         scenario.getNaveJL().setVisible(true);
     }
 
-    public void waitEnter(Scenario scenario) {
+    void waitEnter(Scenario scenario) {
         while (pressEnter) {
             if (scenario.isEnter()) {
                 scenario.getSpace1JL().setVisible(true);
@@ -121,11 +121,11 @@ public class Entrace {
         }
     }
 
-    public Integer getQtdPlayer() {
+    Integer getQtdPlayer() {
         return qtdPlayer;
     }
 
-    public Player[] getArrayPlayers() {
+    Player[] getArrayPlayers() {
         return arrayPlayers;
     }
 

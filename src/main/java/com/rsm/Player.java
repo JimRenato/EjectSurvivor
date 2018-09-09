@@ -1,6 +1,6 @@
 package com.rsm;
 
-public class Player {
+class Player {
 
     private String name;
     private Integer currentCabin;
@@ -10,23 +10,23 @@ public class Player {
         this.name = name;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public boolean isAlive() {
+    boolean isAlive() {
         return alive;
     }
 
-    public void setAlive(boolean alive) {
+    void setAlive(boolean alive) {
         this.alive = alive;
     }
 
-    public Integer getCurrentCabin() {
+    Integer getCurrentCabin() {
         return currentCabin;
     }
 
-    public void setCurrentCabin(Integer currentCabin) {
+    void setCurrentCabin(Integer currentCabin) {
         this.currentCabin = currentCabin;
     }
 

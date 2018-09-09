@@ -6,9 +6,9 @@ import javax.sound.midi.Sequencer;
 import javax.swing.*;
 import java.io.File;
 
-public class Music {
+class Music {
 
-    public void playMusic() {
+    void playMusic() {
         String musicPath = "src/main/resources/music/i-put-a-spell-on-you.mid";
         try {
             Sequencer player = MidiSystem.getSequencer();
